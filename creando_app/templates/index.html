@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Creando</title>
+	<meta charset="utf-8" />
+	{% load staticfiles %}
+
+    <script type="text/javascript" src="{% static 'js/jquery-1.9.1.js' %}"></script>
+        <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+        <script type="text/javascript" src="{% static 'js/java.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+<script type="text/javascript">
+    $(function () {
+        var $menu = $('#ei_menu > ul'),
+					$menuItems = $menu.children('li'),
+					$menuItemsImgWrapper = $menuItems.children('a'),
+					$menuItemsPreview = $menuItemsImgWrapper.children('.ei_preview'),
+					totalMenuItems = $menuItems.length,
+
+					ExpandingMenu = (function () {
+					    /*
+					    @current
+					    set it to the index of the element you want to be opened by default,
+					    or -1 if you want the menu to be closed initially
+					    */
+					    var current = -1,
+					    /*
+					    @anim
+					    if we want the default opened item to animate initialy set this to true
+					    */
+						anim = true,
+					    /*
+					    checks if the current value is valid -
+					    between 0 and the number of items
+					    */
+						validCurrent = function () {
+						    return (current >= 0 && current < totalMenuItems);
+						},
+						init = function () {
+						    /* show default item if current is set to a valid index */
+						    if (validCurrent())
+						        configureMenu();
+
+						    initEventsHandler();
+						},
+						configureMenu = function () {
+						    /* get the item for the current */
+						    var $item = $menuItems.eq(current);
+						    /* if anim is true slide out the item */
+						    if (anim)
+						        slideOutItem($item, true, 900, 'easeInQuint');
+						    else {
+						        /* if not just show it */
+						        $item.css({ width: '630px' })
+								.find('.ei_image')
+								.css({ left: '0px', opacity: 1 });
+
+						        /* decrease the opacity of the others */
+						        $menuItems.not($item)
+											  .children('.ei_preview')
+											  .css({ opacity: 0.2 });
+						    }
+						},
+						initEventsHandler = function () {
+						    /*
+						    when we click an item the following can happen:
+						    1) The item is already opened - close it!
+						    2) The item is closed - open it! (if another one is opened, close it!)
+						    */
+						    $menuItemsImgWrapper.bind('click.ExpandingMenu', function (e) {
+						        var $this = $(this).parent(),
+								idx = $this.index();
+
+						        if (current === idx) {
+						            slideOutItem($menuItems.eq(current), false, 1500, 'easeOutQuint', true);
+						            current = -1;
+						        }
+						        else {
+						            if (validCurrent() && current !== idx)
+						                slideOutItem($menuItems.eq(current), false, 1000, 'jswing');
+
+						            current = idx;
+						            slideOutItem($this, true, 1000, 'jswing');
+						        }
+						        return false;
+						    });
+						},
+					    /* if you want to trigger the action to open a specific item */
+							openItem = function (idx) {
+							    $menuItemsImgWrapper.eq(idx).click();
+							},
+					    /*
+					    opens or closes an item
+					    note that "mLeave" is just true when all the items close,
+					    in which case we want that all of them get opacity 1 again.
+					    "dir" tells us if we are opening or closing an item (true | false)
+					    */
+						slideOutItem = function ($item, dir, speed, easing, mLeave) {
+						    var $ei_image = $item.find('.ei_image'),
+
+							itemParam = (dir) ? { width: '630px'} : { width: '100px' },
+							imageParam = (dir) ? { left: '0px'} : { left: '100px' };
+
+						    /*
+						    if opening, we animate the opacity of all the elements to 0.1.
+						    this is to give focus on the opened item..
+						    */
+						    if (dir)
+						    /*
+						    alternative:
+						    $menuItemsPreview.not($menuItemsPreview.eq(current))
+						    .stop()
+						    .animate({opacity:0.1}, 500);
+						    */
+						        $menuItemsPreview.stop()
+							.animate({ opacity: 0.5 }, 1000);
+						    else if (mLeave)
+						        $menuItemsPreview.stop()
+							.animate({ opacity: 1 }, 1500);
+
+						    /* the <li> expands or collapses */
+						    $item.stop().animate(itemParam, speed, easing);
+						    /* the image (color) slides in or out */
+						    $ei_image.stop().animate(imageParam, speed, easing, function () {
+						        /*
+						        if opening, we animate the opacity to 1,
+						        otherwise we reset it.
+						        */
+						        if (dir)
+						            $ei_image.animate({ opacity: 1 }, 2000);
+						        else
+						            $ei_image.css('opacity', 0.5);
+						    });
+						};
+
+					    return {
+					        init: init,
+					        openItem: openItem
+					    };
+					})();
+
+        /*
+        call the init method of ExpandingMenu
+        */
+        ExpandingMenu.init();
+
+        /*
+        if later on you want to open / close a specific item you could do it like so:
+        ExpandingMenu.openItem(3); // toggles item 3 (zero-based indexing)
+        */
+    });
+        </script>
+      <link rel="stylesheet" type="text/css" href="{% static 'shadowbox/shadowbox.css'%}" />
+      <script type="text/javascript" src="{% static 'shadowbox/shadowbox.js' %}"></script>
+<script type="text/javascript">
+    Shadowbox.init({
+        players: ["iframe"]
+    });
+
+</script>
+<script type="text/javascript">
+    function openShadowbox(content, player, title, height, width) {
+        Shadowbox.open({
+            content: content,
+            player: player,
+            title: title,
+            height: height,
+            width: width
+        });
+    }
+</script>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#tabs2 div').hide();
+        $('#tabs2 div:first').show();
+        $('#tabs2 ul li:first').addClass('active');
+        $('#tabs2 ul li a').click(function () {
+            $('#tabs2 ul li').removeClass('active');
+            $(this).parent().addClass('active');
+            var currentTab = $(this).attr('href');
+            $('#tabs2 div').hide();
+            $(currentTab).show();
+            return false;
+        });
+    });
+</script>
+
+
+<style type="text/css">
+
+.servicios #tabs2 {
+	font-size: 90%;
+	margin:  20px 0;
+
+}
+.servicios #tabs2 ul {
+	float: right;
+	text-align:center;
+	width: 515px;
+	height:10px;
+
+
+}
+
+.servicios #tabs2 li {
+	margin-left: 0px;
+	list-style: none;
+	height:450px;
+}
+.servicios  #tabs2 li {
+	display: inline;
+	width:100px;
+	height:30px;
+}
+.servicios  #tabs2 li, #tabs2 li a {
+	float: left;
+}
+.servicios #tabs2 ul li.active {
+
+
+	height:30px;
+}
+.servicios #tabs2 ul li.active a {
+	color:#fff;
+  background-image:url({% static 'images/tabon.png' %});
+
+}
+.servicios #tabs2 div {
+	 opacity: 1;
+	position:relative;
+	top:20px;
+	clear: both;
+ 	min-height: 565px;
+}
+.servicios #tabs2 div h3 {
+	margin-bottom: 12px;
+}
+.servicios #tabs2 div p {
+		line-height:150%
+}
+.servicios #tabs2 ul li a {
+	text-decoration: none;
+	background-image:url({% static 'images/taboff.png' %});
+	width:100px;
+	height:24px;
+	font-family:Verdana,arial;
+  font-size:8.5px;
+	padding-top: 10px;
+	text-align:center;
+	color: #000;
+	font-weight: bold;
+}
+.servicios .thumbs {
+	float:left;
+	border:#000 solid 1px;
+	margin-bottom:20px;
+	margin-right:20px;
+}
+
+-->
+</style>
+</head>
+
+<body onload = "startTimer()">
+    <div class="wrapper" id="wrapper">
+        <div class="main">
+
+            <table cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                    <td colspan="4"align="center" ><div style="background-image:url('{% static '/images/creando_08.png' %}'); vertical-align:top; width:1020px;  height:8px; "></div></td>
+                </tr>
+                <tr>
+                    <td align="right" valign="top" width="16" height="620px" style="background-image:url('{% static 'images/creando_01.png' %}'); "></td>
+
+                    <td align="left" valign="top" width="170" height="620px" style="background-image:url('{% static '/images/creando_02.png' %}'); background-repeat:no-repeat;">
+                        <div style=" width:170px; height:620px;">
+                            <div style="position:relative; top:460px;  width:103px; height:40px;"><a href="#" onClick="openShadowbox('/contactos', 'iframe', 'Encuentrenos en:', '425', '740')"><img id="img" src="{% static '/images/contactos.png'%}" width="103" height="40" border="0" /></a></div>
+                         </div>
+                    </td>
+                    <td align="left" valign="top" width="830" height="620px">
+                        <div id="ei_menu" class="ei_menu">
+                            <ul>
+                                <li>
+                                    <a href="#" class="pos1">
+                                        <span class="ei_preview"></span>
+                                        <span class="ei_image"></span>
+                                    </a>
+                                    <div class="ei_descr">
+                                        <div style="height:20px;"></div>
+                                        <div><img  src="{% static '/images/laempresa.png' %}" width="515" height="75" alt="" /></div>
+                                        <div style="height:20px;">
+
+                                        </div>
+                                        <h3>Visión</h3>
+                                        <p>
+
+                                            Mediante el uso de tecnologías de punta y profesionales preparados, se ha convertido en una empresa generadora de empleos, capaz de responder de manera eficiente a los cambios de tecnología venideros, para así continuar siendo socios estratégicos de sus clientes, con el objetivo del progreso mutuo en el ámbito laboral.
+                                        </p>
+                                        <h3>Misión</h3>
+                                        <p>
+                                            La empresa desarrolla un trabajo profesional, de alta calidad,  comprometida con la sociedad, abastece las necesidades de publicidad y operativas en Internet de pequeñas, medianas y grandes empresas mediante el diseño y desarrollo de todo tipo de soluciones para la web.
+
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#" class="pos2">
+                                        <span class="ei_preview"></span>
+                                        <span class="ei_image"></span>
+                                    </a>
+                                    <div class="ei_descr">
+                                        {% include "includes/services.html" %}
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#" class="pos3">
+                                        <span class="ei_preview"></span>
+                                        <span class="ei_image"></span>
+                                    </a>
+                                    <div class="ei_descr">
+                                        <iframe frameborder="0" height="100%" width="100%" scrolling="no" src="/clients"></iframe>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </td>
+                    <td align="left" valign="top" width="16" height="620px" style="background-image:url('{% static '/images/creando_07.png' %}');"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4"><div style="background-image:url('{% static '/images/creando_09.png' %}'); vertical-align:top; width:1020px;  height:8px; "></div></td>
+                </tr>
+            </table>
+        </div>
+        <button type="button" onclick="displayPreviousImage()">Previous</button>
+        <button type="button" onclick="displayNextImage()">Next</button>
+    </div>
+
+    <script>
+
+        //function to center the div
+        $("div.main:nth-child(1)").center(true);
+    </script>
+</body>
+
+</html>

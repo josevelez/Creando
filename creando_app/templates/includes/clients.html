@@ -1,0 +1,36 @@
+
+{% block content %}
+	{% for client in object_list %}
+    <div style="padding: 10px 10px 5px 10px;  text-align:center; width:235px; height:175px;">
+          <div style="border-radius:10px; width:235px; height:155px; vertical-align:middle; text-align: center;  background-color:#51AAE0">
+              <div  style="width:220px; height:140px; position:relative; top:7px; left:7px;">
+                  <div  style="border-radius: 10px; width:220px; height:140px; vertical-align:middle; display:block; overflow:hidden;" >
+                        <a  href="#" onClick="openShadowbox('detail/{{client.id}}', 'iframe', ' {{client.name}}', '425', '740')" >
+                        <img src="{{  client.img_small.url }}  " width="220" border="0" ></a>
+                  </div>
+              </div>
+          </div>
+        <div style=" width:235px; height:4px;"></div>
+        <div style=" width:235px; height:16px;  text-align:center;">
+             <a class="link_titulo" href="#" onClick="openShadowbox('detail/{{client.id}}', 'iframe', '{{client.name}} ', '425', '740')" > {{client.name}} </a> </div>
+    </div>
+
+	{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ object_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?page={{ object_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div
+
+{% endblock %}

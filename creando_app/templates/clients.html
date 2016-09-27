@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+
+
+	<style type="text/css">
+		html,
+		body {
+		  height:100%
+		}
+	</style>
+
+{% block content %}
+ <div>
+	{% for client in object_list %}
+    <div class="" style="float:left; width:50%; padding: 0px 0px 0px 0px;" >
+        <div style="padding: 5px 5px 5px 0px;  text-align:center; width:100%; height:185px;">
+          <div style="border-radius:10px; width:235px; height:155px; vertical-align:middle; text-align: center;  background-color:#51AAE0">
+              <div  style="width:220px; height:140px; position:relative; top:7px; left:7px;">
+                  <div  style="border-radius: 10px; width:220px; height:140px; vertical-align:middle; display:block; overflow:hidden;" >
+                        <a  href="#" onClick="parent.openShadowbox('../detail/{{client.id}}', 'iframe', ' {{client.name}}', '425', '740')" >
+                        <img src="{{  client.img_small.url }}  " width="220" border="0" ></a>
+                  </div>
+              </div>
+          </div>
+            <div style=" width:100%; height:4px;"></div>
+            <div style=" width:100%; height:16px;  text-align:center;">
+             <a class="link_titulo" href="#" onClick="parent.openShadowbox('../detail/{{client.id}}', 'iframe', '{{client.name}} ', '425', '740')" > {{client.name}} </a> </div>
+        </div>
+    </div>
+
+
+	{% endfor %}
+
+
+    <div class="pagination"  >
+            {% if object_list.has_previous %}
+                <a class="link_texto" href="?page={{ object_list.previous_page_number }}"> <<- </a>
+            {% endif %}
+
+            <span class="texto">
+                Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}
+            </span>
+
+            {% if object_list.has_next %}
+                <a class="link_texto" href="?page={{ object_list.next_page_number }}"> ->> </a>
+            {% endif %}
+       </div>
+</div>
+{% endblock %}

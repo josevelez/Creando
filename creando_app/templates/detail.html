@@ -1,0 +1,62 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META name="author" content="Creando Multimedia" />
+    
+   {% load staticfiles %}
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+	
+</head>
+<body bgcolor="#FFFFFF"   style="margin:30px 30px 30px 30px; background-image:url({% static 'images/fondo.jpg' %} );" >
+<form id="form1" >
+
+           <table align="center" id="Table1" width="680"  border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                     <td   valign="top"   width="440px"   height="365" >
+                            <div style="border-radius:10px; width:440px; height:365px; vertical-align:middle; text-align: center;  background-color:#51AAE0">
+                                
+                               <div  style="width:425px; height:350px; position:relative; top:7px; left:7px;"><div  style="border-radius: 10px; width:425px; height:350px; vertical-align:middle; display:block; overflow:hidden;" >
+								<img src="{{  instance.img_large.url }}" width="425" alt=  border="0" /></div></div>
+                            </div>
+                      </td>
+                       <td   valign="top"  width="20px"   ></td>
+                       
+                       <td   valign="top" width="220px"  height="365" >
+                         <table align="center" width="220px"  border="0" cellpadding="0" cellspacing="0">
+                    
+                          <tr>
+                                 <td  class="subtitulo"  valign="top"  height="20" >
+									{{  instance.name}}
+								 </td>
+                          </tr>
+                         <tr>
+                                 <td   valign="top"    height="10" ></td>
+                          </tr>
+                          <tr>
+                                 <td  valign="top"   height="20" style="text-align:right;" >
+                                     <a  class="link_titulo" target="_blank" href="{{  instance.url }}" >{{  instance.url }}</a>
+									 </td>
+                          </tr>
+                            <tr>
+                                 <td   valign="top" width="100%" bgcolor="red"    height="30" ></td>
+                          </tr>
+                          <tr>
+                                 <td   valign="top" bgcolor="green" width="100%"   class="texto"  height="40" ></td>
+                          </tr>
+                   
+                        </table>
+                      </td>
+              </tr>
+   
+
+</table>
+<!-- End ImageReady Slices -->
+</form>
+</body>
+</html>
