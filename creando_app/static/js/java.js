@@ -20,20 +20,38 @@ function here() {
 
           function startTimer() {
             //  setInterval(displayNextImage, 3000);
-            $("#img").fadeOut();
 
-   $("#img").fadeOut(300, function(){
-      $(this).attr('src','../static/images/fondo5.png').bind('onreadystatechange load', function(){
-         if (this.complete) $(this).fadeIn(3000);
-      });
-      });
 
+          $("#img").fadeOut(2000, function(){
+                $(this).attr('src',images[randomIndex]).bind('onreadystatechange load', function(){
+                 if (this.complete) $(this).fadeIn(2000);});
+                 });
+          var w = Math.round(window.innerWidth / 40);
+          var h = Math.round(window.innerHeight / 40);
+           for (var x = 1; x <= w; x++) {
+                for (var y = 1; y <= h; y++) {
+                    var unit = $("<div class='unit' >"+ x +","+ y +"</div>");
+                    unit.appendTo('#container2');
+                   
+          
+                  
+                }
+           }
+         //  alert(document.getElementById('#container2').style.width);
+          document.getElementById("#container2").style.width = h + "px";
+
+            
+          
           }
 
           var images = [], x = -1;
-          images[0] = "url('../static/images/fondo4.png')";
+          images[0] = '../static/images/fondo_1.jpg';
+          images[1] = '../static/images/fondo5.png';
+          images[2] = '../static/images/fondo6.png';
+        /*  images[0] = "url('../static/images/fondo4.png')";
           images[1] = "url('../static/images/fondo5.png')";
-          images[2] = "url('../static/images/fondo6.png')";
+          images[2] = "url('../static/images/fondo6.png')";*/
+          var randomIndex = Math.floor(Math.random() * images.length);
 
 
 	/*

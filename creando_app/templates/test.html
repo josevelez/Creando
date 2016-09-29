@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    {% load staticfiles %}
     <script src="../static/js/jquery-1.9.1.js"></script>
     <script src="../static/js/java.js"></script>
   <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
@@ -18,82 +17,15 @@
 
     </script>
 </head>
-<body>
-    <div class="wrapper" >
-        <div class="main">
+<body onload = "startTimer()">
+    <div id="container2">
+        <div class="wrapper" id="wrapper">
+            <div class="main">
 
-                        <table style="background-color:orange;  " cellspacing="0" cellpadding="0" border="0">
-                            <tr>
-                                <td colspan="4" ><div style="background-image:url('{% static '/images/creando_08.png' %}'); vertical-align:top; width:1024px;  height:8px; " ></div></td>
-                            </tr>
-                            <tr>
-                                <td align="right" valign="top" width="16" height="650px" style="background-image:url('{% static 'images/creando_01.png' %}'); "></td>
+            </div>
 
-                                <td align="left" valign="top" width="170" height="650px" style="background-image:url('{% static '/images/creando_02.png' %} '); background-repeat:no-repeat;">
-                                    <div style=" width:170px; height:650px;">
-                                        <div style="position:relative; top:460px;  width:103px; height:40px;"><a href="#" onClick="openShadowbox('/contactos', 'iframe', 'Encuentrenos en:', '425', '740')"><img src="{% static '/images/contactos.png'%}" width="103" height="40" border="0" /></a></div>
-                                        <div style="position:relative; top:560px; left:20px;   width:126px; height:30px;"><a target="_blank" href="http://www.cuatrorios.org"> <img src="{% static '/images/logocuatrorios.png' %}" width="126" height="30" border="0" /></a></div>
-                                    </div>
-                                </td>
-                                <td align="left" valign="top" width="830" height="650px">
-                                    <div id="ei_menu" class="ei_menu">
-                                        <ul>
-                                            <li>
-                                                <a href="#" class="pos1">
-                                                    <span class="ei_preview"></span>
-                                                    <span class="ei_image"></span>
-                                                </a>
-                                                <div class="ei_descr">
-                                                    <div style="height:20px;"></div>
-                                                    <div><img src="{% static '/images/laempresa.png' %}" width="515px" height="75px" alt="" /></div>
-                                                    <div style="height:20px;">
-
-                                                    </div>
-                                                    <h3>Visión</h3>
-                                                    <p>
-
-                                                        Mediante el uso de tecnologías de punta y profesionales preparados, se ha convertido en una empresa generadora de empleos, capaz de responder de manera eficiente a los cambios de tecnología venideros, para así continuar siendo socios estratégicos de sus clientes, con el objetivo del progreso mutuo en el ámbito laboral.
-                                                    </p>
-                                                    <h3>Misión</h3>
-                                                    <p>
-                                                        La empresa desarrolla un trabajo profesional, de alta calidad,  comprometida con la sociedad, abastece las necesidades de publicidad y operativas en Internet de pequeñas, medianas y grandes empresas mediante el diseño y desarrollo de todo tipo de soluciones para la web.
-
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="pos2">
-                                                    <span class="ei_preview"></span>
-                                                    <span class="ei_image"></span>
-                                                </a>
-                                                <div class="ei_descr">
-                                                    {% include "includes/services.html" %}
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="pos3">
-                                                    <span class="ei_preview"></span>
-                                                    <span class="ei_image"></span>
-                                                </a>
-                                                <div class="ei_descr">
-                                                    <iframe frameborder="0" height="100%" width="100%" scrolling="no" src="/clients"></iframe>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </td>
-                                <td align="left" valign="top" width="16" height="650px" style="background-image:url('{% static '/images/creando_07.png' %}');"></td>
-                            </tr>
-          
-                            <tr>
-                                <td colspan="4"><div style="background-image:url('{% static '/images/creando_09.png' %}'); vertical-align:top; width:1024px;  height:8px; "></div></td></tr>
-                        </table>
-        
-  
         </div>
     </div>
-
 
     <script>
 
